@@ -181,6 +181,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.cs-CZ.resx</DependentUpon>
     </Compile>
+    <Compile Include="App_GlobalResources\Resources.de-DE.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.de-DE.resx</DependentUpon>
+    </Compile>
     <Compile Include="FormsAuthorizeRepositoryAttribute.cs" />
     <Compile Include="RepositoryBrowser.cs" />
     <Compile Include="Security\EFMembershipService.cs" />
@@ -224,6 +229,7 @@
     <Content Include="Content\images\commits.png" />
     <Content Include="Content\images\create.png" />
     <Content Include="Content\images\cz.png" />
+    <Content Include="Content\images\de.png" />
     <Content Include="Content\images\detail.png" />
     <Content Include="Content\images\download_file.png" />
     <Content Include="Content\images\jp.png" />
@@ -390,6 +396,11 @@
     <EmbeddedResource Include="App_GlobalResources\Resources.cs-CZ.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.cs-CZ.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App_GlobalResources\Resources.de-DE.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.de-DE.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="App_GlobalResources\Resources.ja-JP.resx">

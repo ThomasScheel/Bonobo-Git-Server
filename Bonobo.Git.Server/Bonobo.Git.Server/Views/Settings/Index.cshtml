@@ -31,13 +31,13 @@
         <div class="ctrlHolder noLabel"> 
             <label for="AllowAnonymousRegistration">@Html.CheckBoxFor(m => m.AllowAnonymousRegistration) @Model.GetType().GetDisplayValue("AllowAnonymousRegistration")</label>
             <p class="formHint">     
-                @Resources.Settings_Global_AllowUserRepositoryCreation_Hint                       
+                @Resources.Settings_Global_AllowAnonymousRegistration_Hint
             </p> 
         </div> 
         <div class="ctrlHolder noLabel"> 
             <label for="AllowUserRepositoryCreation">@Html.CheckBoxFor(m => m.AllowUserRepositoryCreation) @Model.GetType().GetDisplayValue("AllowUserRepositoryCreation")</label>
             <p class="formHint">   
-                @Resources.Settings_Global_AllowAnonymousRegistration_Hint
+                @Resources.Settings_Global_AllowUserRepositoryCreation_Hint                       
             </p> 
         </div> 
         <div class="buttonHolder"> 

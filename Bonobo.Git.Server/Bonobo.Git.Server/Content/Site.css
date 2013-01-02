@@ -74,7 +74,7 @@ a.active { color: #b76900; text-decoration: none;}
 .fl {float: left;}
 .fr {float: right;}
 
-.create a { display: block; width: 220px; height: 50px; background-image: url('images/create.png'); line-height: 50px; text-align: center; border: 1px solid #b9b9b9;}
+.create a { display: block; width: 270px; height: 50px; background-image: url('images/create.png');  line-height: 50px; text-align: center; border: 1px solid #b9b9b9;}
 .create a:hover { background-position: 0 -50px;}
 
 form { width: 100%;}
@@ -105,6 +105,7 @@ div.uniForm #errorMsg { text-align: center;}
 /* Language Bar */
 #languageBar a { display: block; background-image: url('images/cz.png'); width: 16px; height: 11px; float: right; margin-left: 10px; text-decoration:none; font-size:0px;}
 #languageBar #en { background-image: url('images/gb.png');}
+#languageBar #de { background-image: url('images/de.png');}
 #languageBar #zh { background-image: url('images/cn.png');}
 #languageBar #jp { background-image: url('images/jp.png');}
 
