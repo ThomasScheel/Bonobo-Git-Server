@@ -45,3 +45,9 @@ obj/
 
 #Project files
 [Bb]uild/
+
+#Resharper
+_Resharper.*
+Backup
+UpgradeLog.*
+_Upgradereport_Files
