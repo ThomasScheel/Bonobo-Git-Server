@@ -5,10 +5,7 @@
     <meta http-equiv="content-language" content="en" />
     <link rel="shortcut icon" href="@Url.Content("~/favicon.ico")" type="image/x-icon" />
     <title>@ViewBag.Title</title>
-    <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
-    <link href="@Url.Content("~/Content/uni/css/uni-form.css")" rel="stylesheet" type="text/css" />
-    <link href="@Url.Content("~/Content/uni/css/default.uni-form.css")" rel="stylesheet" type="text/css" />
-    <link type="text/css" rel="stylesheet" href="@Url.Content("~/Content/syntaxhighlighter/styles/shCoreDefault.css")"/>
+    <link href="@Url.Content("~/Content/combined.css")" rel="stylesheet" type="text/css" />
     <!--[if lte IE 7]><link rel="stylesheet" href="@Url.Content("~/Content/Msie.css")" type="text/css" media="screen,projection" /><![endif]-->
 </head>
 <body>
@@ -65,37 +62,13 @@
                         @RenderBody()
                     </div>
                 </div>
-                <div id="footer">
+                @*<div id="footer">
                     <p>&copy; 2011 <a href="http://www.chodounsky.net">Jakub Chodounský</a>. @Resources.Layout_Footer_Copyright</p>
-                </div>
+                </div>*@
             </div>
         </div>
     </div>
-    <script type="text/javascript" src="@Url.Content("~/Content/syntaxhighlighter/scripts/shCore.js")"></script>
-    <script type="text/javascript" src="@Url.Content("~/Content/syntaxhighlighter/scripts/shBrushJScript.js")"></script>
-    <script type="text/javascript" src="@Url.Content("~/Content/syntaxhighlighter/scripts/shBrushBash.js")"></script>
-    <script type="text/javascript" src="@Url.Content("~/Content/syntaxhighlighter/scripts/shBrushCpp.js")"></script>
-    <script type="text/javascript" src="@Url.Content("~/Content/syntaxhighlighter/scripts/shBrushCsharp.js")"></script>
-    <script type="text/javascript" src="@Url.Content("~/Content/syntaxhighlighter/scripts/shBrushCss.js")"></script>
-    <script type="text/javascript" src="@Url.Content("~/Content/syntaxhighlighter/scripts/shBrushDelphi.js")"></script>
-    <script type="text/javascript" src="@Url.Content("~/Content/syntaxhighlighter/scripts/shBrushDiff.js")"></script>
-    <script type="text/javascript" src="@Url.Content("~/Content/syntaxhighlighter/scripts/shBrushErlang.js")"></script>
-    <script type="text/javascript" src="@Url.Content("~/Content/syntaxhighlighter/scripts/shBrushJava.js")"></script>
-    <script type="text/javascript" src="@Url.Content("~/Content/syntaxhighlighter/scripts/shBrushPerl.js")"></script>
-    <script type="text/javascript" src="@Url.Content("~/Content/syntaxhighlighter/scripts/shBrushPhp.js")"></script>
-    <script type="text/javascript" src="@Url.Content("~/Content/syntaxhighlighter/scripts/shBrushPowerShell.js")"></script>    
-    <script type="text/javascript" src="@Url.Content("~/Content/syntaxhighlighter/scripts/shBrushPython.js")"></script>
-    <script type="text/javascript" src="@Url.Content("~/Content/syntaxhighlighter/scripts/shBrushRuby.js")"></script>
-    <script type="text/javascript" src="@Url.Content("~/Content/syntaxhighlighter/scripts/shBrushScala.js")"></script>
-    <script type="text/javascript" src="@Url.Content("~/Content/syntaxhighlighter/scripts/shBrushSql.js")"></script>
-    <script type="text/javascript" src="@Url.Content("~/Content/syntaxhighlighter/scripts/shBrushVb.js")"></script>
-    <script type="text/javascript" src="@Url.Content("~/Content/syntaxhighlighter/scripts/shBrushXml.js")"></script>
-    <script type="text/javascript" src="@Url.Content("~/Content/syntaxhighlighter/scripts/shBrushPlain.js")"></script>
-    <script src="@Url.Content("~/Scripts/jquery-1.4.4.min.js")" type="text/javascript"></script>
-    <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
-    <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
-    <script type="text/javascript" src="@Url.Content("~/Content/uni/js/uni-form-validation.jquery.js")"></script>
-    <script src="@Url.Content("~/Scripts/MicrosoftAjax.js")" type="text/javascript"></script>   
+    <script type="text/javascript" src="@Url.Content("~/Scripts/combined.js")"></script>
     <script type="text/javascript">
         SyntaxHighlighter.all();
         $('form.uniForm').uniform();
