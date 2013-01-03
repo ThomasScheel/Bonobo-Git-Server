@@ -59,6 +59,9 @@
     <PackageAsSingleFile>true</PackageAsSingleFile>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BCrypt.Net">
+      <HintPath>..\Libraries\BCrypt.Net.dll</HintPath>
+    </Reference>
     <Reference Include="ICSharpCode.SharpZipLib, Version=0.85.4.369, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\Libraries\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
@@ -225,6 +228,7 @@
     <Content Include="Content\images\detail.png" />
     <Content Include="Content\images\download_file.png" />
     <Content Include="Content\images\jp.png" />
+    <Content Include="Data\DatabaseModel.MSSQL.sql" />
     <Content Include="favicon.ico" />
     <Content Include="Content\images\folder.png" />
     <Content Include="Content\images\address.png" />

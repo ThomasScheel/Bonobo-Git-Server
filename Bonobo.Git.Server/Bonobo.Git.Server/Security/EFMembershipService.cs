@@ -6,6 +6,8 @@ using System.Web.Security;
 using Bonobo.Git.Server.Data;
 using System.Data;
 using Bonobo.Git.Server.Models;
+using BCrypt.Net;
+using System.Security.Cryptography;
 
 namespace Bonobo.Git.Server.Security
 {
@@ -19,7 +21,7 @@ namespace Bonobo.Git.Server.Security
             using (var database = new DataEntities())
             {
                 var user = database.User.FirstOrDefault(i => i.Username == username);
-                return user != null && ComparePassword(password, user.Password);
+                return user != null && (CompareMD5Password(password, user.Password) || ComparePassword(password, user.Password));
             }
         }
 
@@ -111,17 +113,27 @@ namespace Bonobo.Git.Server.Security
             }
         }
 
+        private bool CompareMD5Password(string password, string hash)
+        {
+            return EncryptPasswordMD5(password) == hash;
+        }
+
         private bool ComparePassword(string password, string hash)
         {
-            return EncryptPassword(password) == hash;
+            return BCrypt.Net.BCrypt.Verify(password, hash);
+        }
+
+        private string EncryptPasswordMD5(string password)
+        {
+            var x = new MD5CryptoServiceProvider();
+            var data = System.Text.Encoding.ASCII.GetBytes(password);
+            data = x.ComputeHash(data);
+            return System.Text.Encoding.ASCII.GetString(data);
         }
 
         private string EncryptPassword(string password)
         {
-            System.Security.Cryptography.MD5CryptoServiceProvider x = new System.Security.Cryptography.MD5CryptoServiceProvider();
-            byte[] data = System.Text.Encoding.ASCII.GetBytes(password);
-            data = x.ComputeHash(data);
-            return System.Text.Encoding.ASCII.GetString(data);
+            return BCrypt.Net.BCrypt.HashPassword(password, BCrypt.Net.BCrypt.GenerateSalt(15));
         }
 
         private UserModel CreateViewModel(User user)
