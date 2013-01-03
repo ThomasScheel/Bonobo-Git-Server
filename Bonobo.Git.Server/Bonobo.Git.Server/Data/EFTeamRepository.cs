@@ -13,25 +13,23 @@ namespace Bonobo.Git.Server.Data
         {
             using (var db = new DataEntities())
             {
-                var result = new List<TeamModel>();
-                foreach (var item in db.Team)
-                {
-                    result.Add(new TeamModel
-                    {
-                        Name = item.Name,
-                        Description = item.Description,
-                        Members = item.Members.Select(i => i.Username).ToArray(),
-                        Repositories = item.Repositories.Select(m => m.Name).ToArray(),
-                    });
-                }
-
-                return result;
+                return db.Team.Include("Members")
+                    .Include("Repositories")
+                    .Select(this.CreateViewModel)
+                    .ToList();
             }
         }
 
         public IList<TeamModel> GetTeams(string username)
         {
-            return GetAllTeams().Where(i => i.Members.Contains(username)).ToList();
+            using (var db = new DataEntities())
+            {
+                return db.Team.Include("Members")
+                    .Include("Repositories")
+                    .Where(team => team.Members.Any(member => member.Username == username))
+                    .Select(this.CreateViewModel)
+                    .ToList();
+            }
         }
 
         public TeamModel GetTeam(string name)
@@ -40,14 +38,11 @@ namespace Bonobo.Git.Server.Data
 
             using (var db = new DataEntities())
             {
-                var team = db.Team.FirstOrDefault(i => i.Name == name);
-                return team == null ? null : new TeamModel
-                {
-                    Name = team.Name,
-                    Description = team.Description,
-                    Members = team.Members.Select(m => m.Username).ToArray(),
-                    Repositories = team.Repositories.Select(m => m.Name).ToArray(),
-                };
+                return db.Team.Include("Members")
+                    .Include("Repositories")
+                    .Where(team => team.Name == name)
+                    .Select(this.CreateViewModel)
+                    .FirstOrDefault();
             }
         }
 
@@ -126,6 +121,17 @@ namespace Bonobo.Git.Server.Data
             {
                 team.Members.Add(item);
             }
+        }
+
+        private TeamModel CreateViewModel(Team team)
+        {
+            return new TeamModel
+            {
+                Name = team.Name,
+                Description = team.Description,
+                Members = team.Members.Select(member => member.Username).ToArray(),
+                Repositories = team.Repositories.Select(repo => repo.Name).ToArray(),
+            };
         }
     }
 }

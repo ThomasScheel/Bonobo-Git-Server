@@ -59,19 +59,9 @@ namespace Bonobo.Git.Server.Security
         {
             using (var db = new DataEntities())
             {
-                var result = new List<UserModel>();
-                foreach (var item in db.User)
-                {
-                    result.Add(new UserModel
-                    {
-                        Username = item.Username,
-                        Name = item.Name,
-                        Surname = item.Surname,
-                        Email = item.Email,
-                        Roles = item.Roles.Select(i => i.Name).ToArray(),
-                    });
-                }
-                return result;
+                return db.User.Include("Roles")
+                    .Select(this.CreateViewModel)
+                    .ToList();
             }
         }
 
@@ -81,15 +71,10 @@ namespace Bonobo.Git.Server.Security
 
             using (var db = new DataEntities())
             {
-                var user = db.User.FirstOrDefault(i => i.Username == username);
-                return user == null ? null : new UserModel
-                {
-                    Username = user.Username,
-                    Name = user.Name,
-                    Surname = user.Surname,
-                    Email = user.Email,
-                    Roles = user.Roles.Select(i => i.Name).ToArray(),
-                 };
+                return db.User.Include("Roles")
+                    .Where(user => user.Username == username)
+                    .Select(this.CreateViewModel)
+                    .FirstOrDefault();
             }
         }
 
@@ -139,5 +124,16 @@ namespace Bonobo.Git.Server.Security
             return System.Text.Encoding.ASCII.GetString(data);
         }
 
+        private UserModel CreateViewModel(User user)
+        {
+            return new UserModel
+            {
+                Username = user.Username,
+                Name = user.Name,
+                Surname = user.Surname,
+                Email = user.Email,
+                Roles = user.Roles.Select(i => i.Name).ToArray(),
+            };
+        }
     }
 }

@@ -13,12 +13,11 @@ namespace Bonobo.Git.Server.Data
         {
             using (var db = new DataEntities())
             {
-                var result = new List<RepositoryModel>();
-                foreach (var item in db.Repository)
-                {
-                    result.Add(ConvertToModel(item));
-                }
-                return result;
+                return db.Repository.Include("Users")
+                    .Include("Administrators")
+                    .Include("Teams")
+                    .Select(this.ConvertToModel)
+                    .ToList();
             }
         }
 
@@ -26,17 +25,33 @@ namespace Bonobo.Git.Server.Data
         {
             if (username == null) throw new ArgumentException("username");
 
-            return GetAllRepositories().Where(i => i.Administrators.Contains(username)
-                || i.Users.Contains(username)
-                || i.Teams.FirstOrDefault(t => teams.Contains(t)) != null
-                || i.AnonymousAccess).ToList();
+            using (var db = new DataEntities())
+            {
+                return db.Repository.Include("Users")
+                    .Include("Administrators")
+                    .Include("Teams")
+                    .Where(repo => repo.Administrators.Any(admin => admin.Name == username)
+                        || repo.Users.Any(user => user.Name == username)
+                        || repo.Teams.Any(team => teams.Contains(team.Name))
+                        || repo.Anonymous)
+                    .Select(this.ConvertToModel)
+                    .ToList();
+            }
         }
 
         public IList<RepositoryModel> GetAdministratedRepositories(string username)
         {
             if (username == null) throw new ArgumentException("username");
 
-            return GetAllRepositories().Where(i => i.Administrators.Contains(username)).ToList();
+            using (var db = new DataEntities())
+            {
+                return db.Repository.Include("Users")
+                    .Include("Administrators")
+                    .Include("Teams")
+                    .Where(repo => repo.Administrators.Any(admin => admin.Name == username))
+                    .Select(this.ConvertToModel)
+                    .ToList();
+            }
         }
 
         public RepositoryModel GetRepository(string name)
@@ -45,7 +60,12 @@ namespace Bonobo.Git.Server.Data
 
             using (var db = new DataEntities())
             {
-                return ConvertToModel(db.Repository.FirstOrDefault(i => i.Name == name));
+                return db.Repository.Include("Users")
+                    .Include("Administrators")
+                    .Include("Teams")
+                    .Where(repo => repo.Name == name)
+                    .Select(this.ConvertToModel)
+                    .FirstOrDefault();
             }
         }
 
