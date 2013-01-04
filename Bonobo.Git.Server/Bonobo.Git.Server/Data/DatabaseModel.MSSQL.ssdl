@@ -1,0 +1,246 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Schema Namespace="Bonobo.Git.Server.Data.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+  <EntityContainer Name="BonoboGitServerDataStoreContainer">
+    <EntitySet Name="Repository" EntityType="Bonobo.Git.Server.Data.Store.Repository" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Role" EntityType="Bonobo.Git.Server.Data.Store.Role" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Team" EntityType="Bonobo.Git.Server.Data.Store.Team" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="User" EntityType="Bonobo.Git.Server.Data.Store.User" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TeamRepository_Permission" EntityType="Bonobo.Git.Server.Data.Store.TeamRepository_Permission" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="UserRepository_Administrator" EntityType="Bonobo.Git.Server.Data.Store.UserRepository_Administrator" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="UserRepository_Permission" EntityType="Bonobo.Git.Server.Data.Store.UserRepository_Permission" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="UserRole_InRole" EntityType="Bonobo.Git.Server.Data.Store.UserRole_InRole" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="UserTeam_Member" EntityType="Bonobo.Git.Server.Data.Store.UserTeam_Member" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_TeamRepository_Permission_Repository" Association="Bonobo.Git.Server.Data.Store.FK_TeamRepository_Permission_Repository">
+      <End Role="Repository" EntitySet="Repository" />
+      <End Role="TeamRepository_Permission" EntitySet="TeamRepository_Permission" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TeamRepository_Permission_Team" Association="Bonobo.Git.Server.Data.Store.FK_TeamRepository_Permission_Team">
+      <End Role="Team" EntitySet="Team" />
+      <End Role="TeamRepository_Permission" EntitySet="TeamRepository_Permission" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserRepository_Administrator_Repository" Association="Bonobo.Git.Server.Data.Store.FK_UserRepository_Administrator_Repository">
+      <End Role="Repository" EntitySet="Repository" />
+      <End Role="UserRepository_Administrator" EntitySet="UserRepository_Administrator" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserRepository_Administrator_User" Association="Bonobo.Git.Server.Data.Store.FK_UserRepository_Administrator_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="UserRepository_Administrator" EntitySet="UserRepository_Administrator" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserRepository_Permission_Repository" Association="Bonobo.Git.Server.Data.Store.FK_UserRepository_Permission_Repository">
+      <End Role="Repository" EntitySet="Repository" />
+      <End Role="UserRepository_Permission" EntitySet="UserRepository_Permission" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserRepository_Permission_User" Association="Bonobo.Git.Server.Data.Store.FK_UserRepository_Permission_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="UserRepository_Permission" EntitySet="UserRepository_Permission" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserRole_InRole_Role" Association="Bonobo.Git.Server.Data.Store.FK_UserRole_InRole_Role">
+      <End Role="Role" EntitySet="Role" />
+      <End Role="UserRole_InRole" EntitySet="UserRole_InRole" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserRole_InRole_User" Association="Bonobo.Git.Server.Data.Store.FK_UserRole_InRole_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="UserRole_InRole" EntitySet="UserRole_InRole" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserTeam_Member_Team" Association="Bonobo.Git.Server.Data.Store.FK_UserTeam_Member_Team">
+      <End Role="Team" EntitySet="Team" />
+      <End Role="UserTeam_Member" EntitySet="UserTeam_Member" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserTeam_Member_User" Association="Bonobo.Git.Server.Data.Store.FK_UserTeam_Member_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="UserTeam_Member" EntitySet="UserTeam_Member" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Repository">
+    <Key>
+      <PropertyRef Name="Name" />
+    </Key>
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="255" />
+    <Property Name="Description" Type="nvarchar" Nullable="true" MaxLength="255" />
+    <Property Name="Anonymous" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="Name" />
+    </Key>
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="255" />
+    <Property Name="Description" Type="nvarchar" Nullable="true" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="Team">
+    <Key>
+      <PropertyRef Name="Name" />
+    </Key>
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="255" />
+    <Property Name="Description" Type="nvarchar" Nullable="true" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="Username" />
+    </Key>
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="255" />
+    <Property Name="Surname" Type="nvarchar" Nullable="false" MaxLength="255" />
+    <Property Name="Username" Type="nvarchar" Nullable="false" MaxLength="255" />
+    <Property Name="Password" Type="nvarchar" Nullable="false" MaxLength="255" />
+    <Property Name="Email" Type="nvarchar" Nullable="false" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="TeamRepository_Permission">
+    <Key>
+      <PropertyRef Name="Repositories_Name" />
+      <PropertyRef Name="Teams_Name" />
+    </Key>
+    <Property Name="Repositories_Name" Type="nvarchar" Nullable="false" MaxLength="255" />
+    <Property Name="Teams_Name" Type="nvarchar" Nullable="false" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="UserRepository_Administrator">
+    <Key>
+      <PropertyRef Name="AdministratedRepositories_Name" />
+      <PropertyRef Name="Administrators_Username" />
+    </Key>
+    <Property Name="AdministratedRepositories_Name" Type="nvarchar" Nullable="false" MaxLength="255" />
+    <Property Name="Administrators_Username" Type="nvarchar" Nullable="false" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="UserRepository_Permission">
+    <Key>
+      <PropertyRef Name="Repositories_Name" />
+      <PropertyRef Name="Users_Username" />
+    </Key>
+    <Property Name="Repositories_Name" Type="nvarchar" Nullable="false" MaxLength="255" />
+    <Property Name="Users_Username" Type="nvarchar" Nullable="false" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="UserRole_InRole">
+    <Key>
+      <PropertyRef Name="Roles_Name" />
+      <PropertyRef Name="Users_Username" />
+    </Key>
+    <Property Name="Roles_Name" Type="nvarchar" Nullable="false" MaxLength="255" />
+    <Property Name="Users_Username" Type="nvarchar" Nullable="false" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="UserTeam_Member">
+    <Key>
+      <PropertyRef Name="Teams_Name" />
+      <PropertyRef Name="Members_Username" />
+    </Key>
+    <Property Name="Teams_Name" Type="nvarchar" Nullable="false" MaxLength="255" />
+    <Property Name="Members_Username" Type="nvarchar" Nullable="false" MaxLength="255" />
+  </EntityType>
+  <Association Name="FK_TeamRepository_Permission_Repository">
+    <End Role="Repository" Type="Bonobo.Git.Server.Data.Store.Repository" Multiplicity="1" />
+    <End Role="TeamRepository_Permission" Type="Bonobo.Git.Server.Data.Store.TeamRepository_Permission" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Repository">
+        <PropertyRef Name="Name" />
+      </Principal>
+      <Dependent Role="TeamRepository_Permission">
+        <PropertyRef Name="Repositories_Name" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TeamRepository_Permission_Team">
+    <End Role="TeamRepository_Permission" Type="Bonobo.Git.Server.Data.Store.TeamRepository_Permission" Multiplicity="*" />
+    <End Role="Team" Type="Bonobo.Git.Server.Data.Store.Team" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Team">
+        <PropertyRef Name="Name" />
+      </Principal>
+      <Dependent Role="TeamRepository_Permission">
+        <PropertyRef Name="Teams_Name" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserRepository_Administrator_Repository">
+    <End Role="Repository" Type="Bonobo.Git.Server.Data.Store.Repository" Multiplicity="1" />
+    <End Role="UserRepository_Administrator" Type="Bonobo.Git.Server.Data.Store.UserRepository_Administrator" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Repository">
+        <PropertyRef Name="Name" />
+      </Principal>
+      <Dependent Role="UserRepository_Administrator">
+        <PropertyRef Name="AdministratedRepositories_Name" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserRepository_Administrator_User">
+    <End Role="UserRepository_Administrator" Type="Bonobo.Git.Server.Data.Store.UserRepository_Administrator" Multiplicity="*" />
+    <End Role="User" Type="Bonobo.Git.Server.Data.Store.User" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Username" />
+      </Principal>
+      <Dependent Role="UserRepository_Administrator">
+        <PropertyRef Name="Administrators_Username" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserRepository_Permission_Repository">
+    <End Role="Repository" Type="Bonobo.Git.Server.Data.Store.Repository" Multiplicity="1" />
+    <End Role="UserRepository_Permission" Type="Bonobo.Git.Server.Data.Store.UserRepository_Permission" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Repository">
+        <PropertyRef Name="Name" />
+      </Principal>
+      <Dependent Role="UserRepository_Permission">
+        <PropertyRef Name="Repositories_Name" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserRepository_Permission_User">
+    <End Role="UserRepository_Permission" Type="Bonobo.Git.Server.Data.Store.UserRepository_Permission" Multiplicity="*" />
+    <End Role="User" Type="Bonobo.Git.Server.Data.Store.User" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Username" />
+      </Principal>
+      <Dependent Role="UserRepository_Permission">
+        <PropertyRef Name="Users_Username" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserRole_InRole_Role">
+    <End Role="Role" Type="Bonobo.Git.Server.Data.Store.Role" Multiplicity="1" />
+    <End Role="UserRole_InRole" Type="Bonobo.Git.Server.Data.Store.UserRole_InRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="Name" />
+      </Principal>
+      <Dependent Role="UserRole_InRole">
+        <PropertyRef Name="Roles_Name" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserRole_InRole_User">
+    <End Role="UserRole_InRole" Type="Bonobo.Git.Server.Data.Store.UserRole_InRole" Multiplicity="*" />
+    <End Role="User" Type="Bonobo.Git.Server.Data.Store.User" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Username" />
+      </Principal>
+      <Dependent Role="UserRole_InRole">
+        <PropertyRef Name="Users_Username" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserTeam_Member_Team">
+    <End Role="Team" Type="Bonobo.Git.Server.Data.Store.Team" Multiplicity="1" />
+    <End Role="UserTeam_Member" Type="Bonobo.Git.Server.Data.Store.UserTeam_Member" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Team">
+        <PropertyRef Name="Name" />
+      </Principal>
+      <Dependent Role="UserTeam_Member">
+        <PropertyRef Name="Teams_Name" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserTeam_Member_User">
+    <End Role="UserTeam_Member" Type="Bonobo.Git.Server.Data.Store.UserTeam_Member" Multiplicity="*" />
+    <End Role="User" Type="Bonobo.Git.Server.Data.Store.User" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Username" />
+      </Principal>
+      <Dependent Role="UserTeam_Member">
+        <PropertyRef Name="Members_Username" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="BonoboGitServerDataStoreContainer" CdmEntityContainer="DataEntities">
+    <EntitySetMapping Name="Repository">
+      <EntityTypeMapping TypeName="IsTypeOf(Bonobo.Git.Server.Data.Repository)">
+        <MappingFragment StoreEntitySet="Repository">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Anonymous" ColumnName="Anonymous" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Role">
+      <EntityTypeMapping TypeName="IsTypeOf(Bonobo.Git.Server.Data.Role)">
+        <MappingFragment StoreEntitySet="Role">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Team">
+      <EntityTypeMapping TypeName="IsTypeOf(Bonobo.Git.Server.Data.Team)">
+        <MappingFragment StoreEntitySet="Team">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="User">
+      <EntityTypeMapping TypeName="IsTypeOf(Bonobo.Git.Server.Data.User)">
+        <MappingFragment StoreEntitySet="User">
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Surname" ColumnName="Surname" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="TeamRepository_Permission" TypeName="Bonobo.Git.Server.Data.TeamRepository_Permission" StoreEntitySet="TeamRepository_Permission">
+      <EndProperty Name="Repository">
+        <ScalarProperty Name="Name" ColumnName="Repositories_Name" />
+      </EndProperty>
+      <EndProperty Name="Team">
+        <ScalarProperty Name="Name" ColumnName="Teams_Name" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="UserRepository_Administrator" TypeName="Bonobo.Git.Server.Data.UserRepository_Administrator" StoreEntitySet="UserRepository_Administrator">
+      <EndProperty Name="Repository">
+        <ScalarProperty Name="Name" ColumnName="AdministratedRepositories_Name" />
+      </EndProperty>
+      <EndProperty Name="User">
+        <ScalarProperty Name="Username" ColumnName="Administrators_Username" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="UserRepository_Permission" TypeName="Bonobo.Git.Server.Data.UserRepository_Permission" StoreEntitySet="UserRepository_Permission">
+      <EndProperty Name="Repository">
+        <ScalarProperty Name="Name" ColumnName="Repositories_Name" />
+      </EndProperty>
+      <EndProperty Name="User">
+        <ScalarProperty Name="Username" ColumnName="Users_Username" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="UserRole_InRole" TypeName="Bonobo.Git.Server.Data.UserRole_InRole" StoreEntitySet="UserRole_InRole">
+      <EndProperty Name="Role">
+        <ScalarProperty Name="Name" ColumnName="Roles_Name" />
+      </EndProperty>
+      <EndProperty Name="User">
+        <ScalarProperty Name="Username" ColumnName="Users_Username" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="UserTeam_Member" TypeName="Bonobo.Git.Server.Data.UserTeam_Member" StoreEntitySet="UserTeam_Member">
+      <EndProperty Name="Team">
+        <ScalarProperty Name="Name" ColumnName="Teams_Name" />
+      </EndProperty>
+      <EndProperty Name="User">
+        <ScalarProperty Name="Username" ColumnName="Members_Username" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

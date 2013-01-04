@@ -231,6 +231,7 @@
     <Content Include="Content\images\download_file.png" />
     <Content Include="Content\images\jp.png" />
     <Content Include="Data\DatabaseModel.MSSQL.sql" />
+    <EmbeddedResource Include="Data\DatabaseModel.MSSQL.ssdl" />
     <Content Include="favicon.ico" />
     <Content Include="Content\images\folder.png" />
     <Content Include="Content\images\address.png" />
@@ -343,6 +344,7 @@
     <Content Include="Views\Account\Delete.cshtml" />
     <Content Include="Content\_css.chirp.config" />
     <Content Include="Scripts\_js.chirp.config" />
+    <EmbeddedResource Include="Data\DatabaseModel.MSSQL.msl" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GitSharp.Core\GitSharp.Core.csproj">
