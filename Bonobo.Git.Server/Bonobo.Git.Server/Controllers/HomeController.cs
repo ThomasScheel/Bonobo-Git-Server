@@ -56,22 +56,27 @@ namespace Bonobo.Git.Server.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (MembershipService.ValidateUser(model.Username, model.Password))
+                if (MembershipService.UserExists(model.Username))
                 {
-                    FormsAuthenticationService.SignIn(model.Username, model.RememberMe);
-                    if (Url.IsLocalUrl(model.ReturnUrl))
+                    if (MembershipService.ValidateUser(model.Username, model.Password))
                     {
-                        return Redirect(model.ReturnUrl);
+                        FormsAuthenticationService.SignIn(model.Username, model.RememberMe);
+                        if (Url.IsLocalUrl(model.ReturnUrl))
+                        {
+                            return Redirect(model.ReturnUrl);
+                        }
+                        else
+                        {
+                            return RedirectToAction("Index", "Home");
+                        }
                     }
                     else
                     {
-                        return RedirectToAction("Index", "Home");
+                        ModelState.AddModelError("", Resources.Home_LogOn_UsernamePasswordIncorrect);
                     }
                 }
                 else
-                {
-                    ModelState.AddModelError("", Resources.Home_LogOn_UsernamePasswordIncorrect);
-                }
+                    ModelState.AddModelError("", Resources.Home_LogOn_UserNotExisting);
             }
 
             return View(model);

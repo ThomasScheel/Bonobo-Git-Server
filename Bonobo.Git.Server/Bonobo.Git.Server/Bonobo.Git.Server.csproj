@@ -85,6 +85,7 @@
       <HintPath>..\Libraries\System.Data.SQLite.Linq.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.ComponentModel.DataAnnotations">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -164,6 +165,7 @@
     <Compile Include="Data\IRepositoryRepository.cs" />
     <Compile Include="Data\ITeamRepository.cs" />
     <Compile Include="EmailAttribute.cs" />
+    <Compile Include="Extensions\HtmlExtensions.cs" />
     <Compile Include="Extensions\TypeExtensions.cs" />
     <Compile Include="FileActionResult.cs" />
     <Compile Include="FileNameAttribute.cs" />

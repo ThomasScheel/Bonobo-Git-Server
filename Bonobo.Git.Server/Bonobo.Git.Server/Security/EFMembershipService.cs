@@ -8,6 +8,8 @@ using System.Data;
 using Bonobo.Git.Server.Models;
 using BCrypt.Net;
 using System.Security.Cryptography;
+using System.DirectoryServices;
+using System.Text;
 
 namespace Bonobo.Git.Server.Security
 {
@@ -18,11 +20,42 @@ namespace Bonobo.Git.Server.Security
             if (String.IsNullOrEmpty(username)) throw new ArgumentException("Value cannot be null or empty.", "userName");
             if (String.IsNullOrEmpty(password)) throw new ArgumentException("Value cannot be null or empty.", "password");
 
-            using (var database = new DataEntities())
+            User user = GetUserObject(username);
+
+            if (user == null)
+                return false;
+
+            if (UserConfigurationManager.UseADAuthentication)
             {
-                var user = database.User.FirstOrDefault(i => i.Username == username);
+                if (String.IsNullOrEmpty(UserConfigurationManager.DomainName)) throw new ArgumentException("Value cannot be null or empty.", "DomainName");
+                if (String.IsNullOrEmpty(UserConfigurationManager.DomainPath)) throw new ArgumentException("Value cannot be null or empty.", "DomainPath");
+
+                LdapAuthentication adAuth = new LdapAuthentication(UserConfigurationManager.DomainPath);
+
+                if (adAuth.IsAuthenticated(UserConfigurationManager.DomainName, username, password))
+                    return true;
+                else // fallback to local authentication
+                    return user != null && (CompareMD5Password(password, user.Password) || ComparePassword(password, user.Password));
+            }
+            else
+            {
                 return user != null && (CompareMD5Password(password, user.Password) || ComparePassword(password, user.Password));
             }
+        }
+
+        public User GetUserObject(string username)
+        {
+            if (String.IsNullOrEmpty(username)) throw new ArgumentException("Value cannot be null or empty.", "userName");
+
+            using (var database = new DataEntities())
+            {
+                return database.User.FirstOrDefault(i => i.Username == username);
+            }
+        }
+
+        public bool UserExists(string username)
+        {
+            return GetUserObject(username) != null;
         }
 
         public bool CreateUser(string username, string password, string name, string surname, string email)
@@ -146,6 +179,51 @@ namespace Bonobo.Git.Server.Security
                 Email = user.Email,
                 Roles = user.Roles.Select(i => i.Name).ToArray(),
             };
+        }
+    }
+
+    public class LdapAuthentication
+    {
+        private string _path;
+        private string _filterAttribute;
+
+        public LdapAuthentication(string path)
+        {
+            _path = path;
+        }
+
+        public bool IsAuthenticated(string domain, string username, string pwd)
+        {
+            string domainAndUsername = domain + @"\" + username;
+            DirectoryEntry entry = new DirectoryEntry(_path, domainAndUsername, pwd);
+
+            try
+            {
+                //Bind to the native AdsObject to force authentication.
+                object obj = entry.NativeObject;
+
+                DirectorySearcher search = new DirectorySearcher(entry);
+
+                search.Filter = "(SAMAccountName=" + username + ")";
+                search.PropertiesToLoad.Add("cn");
+                SearchResult result = search.FindOne();
+
+                if (null == result)
+                {
+                    return false;
+                }
+
+                //Update the new path to the user in the directory.
+                _path = result.Path;
+                _filterAttribute = (string)result.Properties["cn"][0];
+            }
+            catch (Exception ex)
+            {
+                //throw new Exception("Error authenticating user. " + ex.Message);
+                return false;
+            }
+
+            return true;
         }
     }
 }

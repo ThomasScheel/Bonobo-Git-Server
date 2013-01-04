@@ -40,6 +40,28 @@
                 @Resources.Settings_Global_AllowUserRepositoryCreation_Hint                       
             </p> 
         </div> 
+        <div class="ctrlHolder noLabel"> 
+            <label for="UseADAuthentication">@Html.CheckBoxFor(m => m.UseADAuthentication, new { onclick = "document.getElementById('" + Html.IdFor(m => m.DomainName) + "').disabled=(this.checked)?false:true;document.getElementById('" + Html.IdFor(m => m.DomainPath) + "').disabled=(this.checked)?false:true" }) @Model.GetType().GetDisplayValue("UseADAuthentication")</label>
+            <p class="formHint">              
+                @Resources.Settings_Global_UseADAuthentication_Hint                       
+            </p> 
+        </div> 
+        <div class="ctrlHolder"> 
+            @Html.LabelFor(m => m.DomainName)
+            @Html.TextBoxFor(m => m.DomainName, Model.UseADAuthentication ? (object) new { @class = "textInput" } 
+                                                                          : (object) new { @class = "textInput", disabled = "true" })
+            <p class="formHint">
+              @Resources.Settings_Global_DomainName_Hint
+            </p> 
+        </div> 
+        <div class="ctrlHolder"> 
+            @Html.LabelFor(m => m.DomainPath)
+            @Html.TextBoxFor(m => m.DomainPath, Model.UseADAuthentication ? (object)new { @class = "textInput" } 
+                                                                          : (object) new { @class = "textInput", disabled = "true" })
+            <p class="formHint">
+              @Resources.Settings_Global_DomainPath_Hint
+            </p> 
+        </div> 
         <div class="buttonHolder"> 
             <button type="reset" class="secondaryAction">← @Resources.Reset</button> 
             <input type="submit" value="@Resources.Settings_Index_Save" class="primaryAction" />

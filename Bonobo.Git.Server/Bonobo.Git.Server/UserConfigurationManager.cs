@@ -80,6 +80,46 @@ namespace Bonobo.Git.Server
             }
         }
 
+
+        public static string DomainName
+        {
+            get
+            {
+                return Configuration.DomainName;
+            }
+            set
+            {
+                Configuration.DomainName = value;
+            }
+        }
+
+
+        public static string DomainPath
+        {
+            get
+            {
+                return Configuration.DomainPath;
+            }
+            set
+            {
+                Configuration.DomainPath = value;
+            }
+        }
+
+
+        public static bool UseADAuthentication
+        {
+            get
+            {
+                return Configuration.UseADAuthentication;
+            }
+            set
+            {
+                Configuration.UseADAuthentication = value;
+            }
+        }
+
+
         public static void Save()
         {
             using (var file = new FileStream(_configPath, FileMode.Create))
