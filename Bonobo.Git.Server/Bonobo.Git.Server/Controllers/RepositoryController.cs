@@ -129,6 +129,76 @@ namespace Bonobo.Git.Server.Controllers
             return View(model);
         }
 
+        [FormsAuthorizeAttribute]
+        public ActionResult Add()
+        {
+            if (!User.IsInRole(Definitions.Roles.Administrator) && !UserConfigurationManager.AllowUserRepositoryCreation)
+            {
+                return RedirectToAction("Unauthorized", "Home");
+            }
+
+            var model = new RepositoryDetailModel
+            {
+                Administrators = new string[] { User.Identity.Name },
+            };
+            PopulateEditData();
+            return View(model);
+        }
+
+        [HttpPost]
+        [FormsAuthorizeAttribute]
+        public ActionResult Add(RepositoryDetailModel model)
+        {
+            if (!User.IsInRole(Definitions.Roles.Administrator) && !UserConfigurationManager.AllowUserRepositoryCreation)
+            {
+                return RedirectToAction("Unauthorized", "Home");
+            }
+
+            if (model != null && !String.IsNullOrEmpty(model.Name))
+            {
+                model.Name = Regex.Replace(model.Name, @"\s", "");
+            }
+
+            if (String.IsNullOrEmpty(model.Name))
+            {
+                ModelState.AddModelError("Name", Resources.Repository_Add_NameFailure);
+            }
+            else if (ModelState.IsValid)
+            {
+                if (RepositoryRepository.Create(ConvertRepositoryDetailModel(model)))
+                {
+                    string path = Path.Combine(UserConfigurationManager.Repositories, model.Name);
+                    if (Directory.Exists(path))
+                    {
+                        using (GitSharp.Repository repository = new GitSharp.Repository(path))
+                        {
+                            if (repository.Branches.Count > 0)
+                            {
+                                TempData["AddSuccess"] = true;
+                                return RedirectToAction("Index");
+                            }
+                            else
+                            {
+                                RepositoryRepository.Delete(model.Name);
+                                ModelState.AddModelError("", Resources.Repository_Add_NoBranches);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        RepositoryRepository.Delete(model.Name);
+                        ModelState.AddModelError("", Resources.Repository_Add_DirectoryNotExisting);
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError("", Resources.Repository_Create_Failure);
+                }
+            }
+            PopulateEditData();
+            return View(model);
+        }
+
         [FormsAuthorizeRepository(RequiresRepositoryAdministrator = true)]
         public ActionResult Delete(string id)
         {

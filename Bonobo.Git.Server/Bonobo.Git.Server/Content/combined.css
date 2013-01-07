@@ -57,8 +57,12 @@ a.active{color:#b76900;text-decoration:none}
 .clearfix:after{content:'.';display:block;height:0;overflow:hidden;clear:both;visibility:hidden}
 .fl{float:left}
 .fr{float:right}
-.create a{display:block;width:220px;height:50px;background-image:url('images/create.png');line-height:50px;text-align:center;border:1px solid #b9b9b9}
+div.create {display:inline}
+div.add {display:inline}
+.create a{display:inline-block;width:220px;height:50px;background-image:url('images/create.png');line-height:50px;text-align:center;border:1px solid #b9b9b9}
+.add a{display:inline-block;width:220px;height:50px;background-image:url('images/create.png');line-height:50px;text-align:center;border:1px solid #b9b9b9}
 .create a:hover{background-position:0 -50px}
+.add a:hover{background-position:0 -50px}
 form{width:100%}
 #content fieldset legend{color:#b9b9b9;padding-bottom:.5em}
 form.uniForm em{padding:0 .5em}

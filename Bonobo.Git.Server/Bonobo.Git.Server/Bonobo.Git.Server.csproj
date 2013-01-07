@@ -345,6 +345,7 @@
     <Content Include="Content\_css.chirp.config" />
     <Content Include="Scripts\_js.chirp.config" />
     <EmbeddedResource Include="Data\DatabaseModel.MSSQL.msl" />
+    <Content Include="Views\Repository\Add.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GitSharp.Core\GitSharp.Core.csproj">

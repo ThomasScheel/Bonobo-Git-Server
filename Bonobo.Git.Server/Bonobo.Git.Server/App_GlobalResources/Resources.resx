@@ -729,4 +729,34 @@
   <data name="Home_LogOn_UserNotExisting" xml:space="preserve">
     <value>User does not exist.</value>
   </data>
+  <data name="Repository_Add_Back" xml:space="preserve">
+    <value>Back to list</value>
+  </data>
+  <data name="Repository_Add_DirectoryNotExisting" xml:space="preserve">
+    <value>Repository directory could not be found</value>
+  </data>
+  <data name="Repository_Add_Fail" xml:space="preserve">
+    <value>Repository adding was unsuccessful. Please correct the errors and try again.</value>
+  </data>
+  <data name="Repository_Add_Informations" xml:space="preserve">
+    <value>Repository information</value>
+  </data>
+  <data name="Repository_Add_NameFailure" xml:space="preserve">
+    <value>Name shouldn't contain only whitespaces.</value>
+  </data>
+  <data name="Repository_Add_Submit" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="Repository_Add_Success" xml:space="preserve">
+    <value>Repository was created successfully.</value>
+  </data>
+  <data name="Repository_Add_Title" xml:space="preserve">
+    <value>Add existing repository</value>
+  </data>
+  <data name="Repository_Index_AddNew" xml:space="preserve">
+    <value>Add existing repository</value>
+  </data>
+  <data name="Repository_Add_NoBranches" xml:space="preserve">
+    <value>No branches found in repository</value>
+  </data>
 </root>

@@ -844,6 +844,87 @@ namespace Bonobo.Git.Server.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Back to list ähnelt.
+        /// </summary>
+        public static string Repository_Add_Back {
+            get {
+                return ResourceManager.GetString("Repository_Add_Back", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Repository directory could not be found ähnelt.
+        /// </summary>
+        public static string Repository_Add_DirectoryNotExisting {
+            get {
+                return ResourceManager.GetString("Repository_Add_DirectoryNotExisting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Repository adding was unsuccessful. Please correct the errors and try again. ähnelt.
+        /// </summary>
+        public static string Repository_Add_Fail {
+            get {
+                return ResourceManager.GetString("Repository_Add_Fail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Repository information ähnelt.
+        /// </summary>
+        public static string Repository_Add_Informations {
+            get {
+                return ResourceManager.GetString("Repository_Add_Informations", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Name shouldn&apos;t contain only whitespaces. ähnelt.
+        /// </summary>
+        public static string Repository_Add_NameFailure {
+            get {
+                return ResourceManager.GetString("Repository_Add_NameFailure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die No branches found in repository ähnelt.
+        /// </summary>
+        public static string Repository_Add_NoBranches {
+            get {
+                return ResourceManager.GetString("Repository_Add_NoBranches", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Add ähnelt.
+        /// </summary>
+        public static string Repository_Add_Submit {
+            get {
+                return ResourceManager.GetString("Repository_Add_Submit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Repository was created successfully. ähnelt.
+        /// </summary>
+        public static string Repository_Add_Success {
+            get {
+                return ResourceManager.GetString("Repository_Add_Success", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Add existing repository ähnelt.
+        /// </summary>
+        public static string Repository_Add_Title {
+            get {
+                return ResourceManager.GetString("Repository_Add_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Home ähnelt.
         /// </summary>
         public static string Repository_AddressBar_Root {
@@ -1290,6 +1371,15 @@ namespace Bonobo.Git.Server.App_GlobalResources {
         public static string Repository_Edit_UpdateSuccess {
             get {
                 return ResourceManager.GetString("Repository_Edit_UpdateSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Add existing repository ähnelt.
+        /// </summary>
+        public static string Repository_Index_AddNew {
+            get {
+                return ResourceManager.GetString("Repository_Index_AddNew", resourceCulture);
             }
         }
         

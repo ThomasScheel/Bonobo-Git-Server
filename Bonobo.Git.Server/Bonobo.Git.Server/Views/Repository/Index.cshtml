@@ -12,6 +12,14 @@
         </div>
     </div>
 }
+@if (TempData["AddSuccess"] != null && (bool)TempData["AddSuccess"])
+{
+    <div class="uniForm">    
+        <div id="okMsg">
+            <p>@Resources.Repository_Add_Success</p>
+        </div>
+    </div>
+}
 @if (TempData["DeleteSuccess"] != null && (bool)TempData["DeleteSuccess"])
 {
     <div class="uniForm">    
@@ -23,6 +31,7 @@
 @if (User.IsInRole(Definitions.Roles.Administrator) || UserConfigurationManager.AllowUserRepositoryCreation)
 {
     <div class="create">@Html.ActionLink(Resources.Repository_Index_CreateNew, "Create")</div>
+    <div class="add">@Html.ActionLink(Resources.Repository_Index_AddNew, "Add")</div>
 }
 <h3>@Resources.Repository_Index_Repositories</h3>
 <div class="w-grid">

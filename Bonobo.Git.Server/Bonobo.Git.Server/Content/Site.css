@@ -209,8 +209,24 @@ a {
 
 .fr { float: right; }
 
+div.create {
+    display:inline
+}
+div.add {
+    display:inline
+}
+
 .create a {
-    display: block;
+    display: inline-block;
+    width: 220px;
+    height: 50px;
+    background-image: url('images/create.png');
+    line-height: 50px;
+    text-align: center;
+    border: 1px solid #b9b9b9; }
+
+.add a {
+    display: inline-block;
     width: 220px;
     height: 50px;
     background-image: url('images/create.png');
@@ -219,6 +235,8 @@ a {
     border: 1px solid #b9b9b9; }
 
     .create a:hover { background-position: 0 -50px; }
+
+    .add a:hover { background-position: 0 -50px; }
 
 form { width: 100%; }
 
